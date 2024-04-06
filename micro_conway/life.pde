@@ -2,6 +2,7 @@ void drawGrid(){
 loadPixels();
   for (int i = 0; i < buffers[current_buffer].length; i = i+1){
     // Iterate over boxes
+    int xpos, ypos, update;
     for (int y = 0; y < resolution+1; y = y+1){
       // Iterate up per box
          for (int x = 0; x < resolution; x = x+1) {
@@ -42,6 +43,7 @@ int count_neighbors(int index){
     for (int x = 0; x < 3; x += 1){
       
       int i = (index-floor(b_width)-1)+(floor(b_width)*y)+x;
+      i = i%buffers[current_buffer].length;
       i = min(buffers[current_buffer].length-1,(max(0,i)));
       if (buffers[int(!boolean(current_buffer))][i]&&i!=index){
        neighbors += 1;
@@ -49,4 +51,14 @@ int count_neighbors(int index){
   }
 }
 return neighbors;
+}
+
+void playPause(){
+if(!paused&&frameCount%step_time==0){
+    if (current_buffer==0){
+      current_buffer = 1;
+    } else {
+      current_buffer = 0;
+    }
+  }
 }
