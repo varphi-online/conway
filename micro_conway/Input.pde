@@ -1,11 +1,11 @@
-void liveInput(){
-  if(mousePressed){
+void liveInput() {
+  if (mousePressed) {
     int clicked_index = floor(mouseX / resolution) + floor(mouseY / resolution) * int(b_width);
-    clicked_index = min(buffers[current_buffer].length-1,(max(0,clicked_index)));
-    if (!m_debounce){
+    clicked_index = min(buffers[current_buffer].length-1, (max(0, clicked_index)));
+    if (!m_debounce) {
       mode = buffers[current_buffer][clicked_index];
     }
-    if (paused){
+    if (paused) {
       m_debounce = true;
       buffers[current_buffer][clicked_index] = !mode;
       buffers[int(!boolean(current_buffer))][clicked_index] = !mode;
@@ -16,23 +16,23 @@ void liveInput(){
   }
 }
 
-void keyPressed() 
-  {
-    if (!keybounce){
-    if (key == ' '){
+void keyPressed()
+{
+  if (!keybounce) {
+    if (key == ' ') {
       keybounce=true;
       paused = !paused;
-    } else if (keyCode == 82){
+    } else if (keyCode == 82) {
       reset();
       keybounce=true;
-    } else if (key == 'm'){
+    } else if (key == 'm') {
       paused = true;
       stage = stage == "main" ? "play": "main";
     }
   }
-  }
+}
 
-void keyReleased(){
+void keyReleased() {
   keybounce=false;
 }
 void mouseReleased() {
