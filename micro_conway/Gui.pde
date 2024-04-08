@@ -94,21 +94,21 @@ void gui() {
     rules[i].render();
   }
   fill(255);
-  textSize(150);
+  textSize(text_scale*150);
   textAlign(CENTER);
   text("Playing God", width/2, rules[0].y_pos()/2);
-  textSize(35);
+  textSize(text_scale*35);
   //text("By: Aidan Fuhrmann",width/2,rules[0].y_pos()/2+rules[0].y_pos()/5);
   textAlign(LEFT);
-  textSize(35);
+  textSize(text_scale*35);
   text("Radius to check neighbors", xoffset, rules[0].y_pos());
   text("Underpopulation amount", xoffset, rules[1].y_pos());
   text("Overpopulation amount", xoffset, rules[2].y_pos());
   text("Amount for cell to be born", xoffset, rules[3].y_pos());
   text("Cell size (In pixels)", xoffset, rules[4].y_pos());
-  textSize(25);
+  textSize(text_scale*25);
   String description = "A cellular automaton consists of a regular grid of cells, each in one of a finite number of states, such as on and off (in contrast to a coupled map lattice). The grid can be in any finite number of dimensions. For each cell, a set of cells called its neighborhood is defined relative to the specified cell. An initial state (time t = 0) is selected by assigning a state for each cell. A new generation is created (advancing t by 1), according to some fixed rule (generally, a mathematical function)[3] that determines the new state of each cell in terms of the current state of the cell and the states of the cells in its neighborhood. Typically, the rule for updating the state of cells is the same for each cell and does not change over time, and is applied to the whole grid simultaneously,[4] though exceptions are known, such as the stochastic cellular automaton and asynchronous cellular automaton.";
-  String controls = "\n\n\n\n\nSPACE   -  Play/pause\nM       -  Return to this menu\nR       -  Restart simulation\nESC     -  Exit\nMOUSE   -  Draw/Erase\nSCROLL  -  Change brush size";
+  String controls = "\n\n\n\n\nSPACE   -  Play/pause\nM       -  Return to this menu\nR       -  Restart simulation\nESC     -  Exit\nMOUSE   -  Draw/Erase\n";
   text(description+controls, width/8, rules[0].y_pos()-25, width/2-width/8-width/16, rules[3].y_pos());
 }
 

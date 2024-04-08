@@ -1,6 +1,8 @@
 void liveInput() {
   if (mousePressed) {
     int clicked_index = floor(mouseX / resolution) + floor(mouseY / resolution) * int(b_width);
+
+
     clicked_index = min(buffers[current_buffer].length-1, (max(0, clicked_index)));
     if (!m_debounce) {
       mode = buffers[current_buffer][clicked_index];
