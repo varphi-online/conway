@@ -1,3 +1,13 @@
+void life_setup(){
+buff_size = width*height/floor(pow(resolution,2));
+buffers = new boolean[2][buff_size];
+buffers[0] = new boolean[buff_size];
+buffers[1] = new boolean[buff_size];
+b_width = width/resolution;
+
+reset();
+}
+
 void drawGrid(){
 loadPixels();
   for (int i = 0; i < buffers[current_buffer].length; i = i+1){
@@ -20,12 +30,13 @@ loadPixels();
          }
       }
       if(!paused&&frameCount%step_time==0){
+      int neighbors = count_neighbors(i);
       if (buffers[int(!boolean(current_buffer))][i]) {
-        if (count_neighbors(i) < 2 || count_neighbors(i) > 3) {
+        if (neighbors < underpop || neighbors > overpop) {
           buffers[current_buffer][i] = false;
         }
       } else {
-        if (count_neighbors(i) == 3) {
+        if (neighbors == birth) {
           buffers[current_buffer][i] = true;
         }
       }
@@ -39,8 +50,8 @@ updatePixels();
 
 int count_neighbors(int index){
   int neighbors = 0;
-  for (int y = 0; y < 3; y += 1){
-    for (int x = 0; x < 3; x += 1){
+  for (int y = 0; y < 2*dist+1; y += 1){
+    for (int x = 0; x < 2*dist+1; x += 1){
       
       int i = (index-floor(b_width)-1)+(floor(b_width)*y)+x;
       i = i%buffers[current_buffer].length;
@@ -61,4 +72,15 @@ if(!paused&&frameCount%step_time==0){
       current_buffer = 0;
     }
   }
+}
+
+void reset(){
+      for (int i = 0; i < buff_size; i++) {
+        buffers[0][i] = false;
+        buffers[1][i] = false;
+      }
+      for (int i = 0; i <= b_width; i ++){
+        buffers[0][i+((height/resolution)/2)*int(b_width)] = true;
+        buffers[1][i+((height/resolution)/2)*int(b_width)] = true;
+      }
 }

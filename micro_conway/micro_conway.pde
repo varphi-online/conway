@@ -1,33 +1,36 @@
 boolean[][] buffers;
 int current_buffer; 
 float b_width;
-boolean debounce = false;
+boolean m_debounce = false;
+boolean keybounce = false;
 boolean paused = true;
-int step_time = 1; //frames between update
+int step_time = 2; //frames between update
 boolean mode;
-
-int resolution = 1;
+int resolution, buff_size, old_rez;
+String stage;
+TextBox[] rules = new TextBox[6];
+PFont mono;
+int underpop,overpop,birth,dist;
 
 void setup() {
-size(2300,1300);
+// Window setup
+mono = createFont("OCR A Extended", 128);
+textFont(mono);
+fullScreen();
 windowTitle("Space to play/pause, click to edit.");
-int buff_size = width*height/floor(pow(resolution,2));
-buffers = new boolean[2][buff_size];
-buffers[0] = new boolean[buff_size];
-buffers[1] = new boolean[buff_size];
-b_width = width/resolution;
-
-for (int i = 0; i <= b_width; i ++){
-  buffers[0][i+((height/resolution)/2)*int(b_width)] = true;
-  buffers[1][i] = true;
-}
-
-frameRate = 120;
+frameRate = 60;
+stage = "main";
+gui_init();
 }
 
 
 void draw(){
-  playPause(); //<>//
-  drawGrid();
-  liveInput();
+  if (stage == "main"){
+    gui();
+  } else if (stage == "play"){
+    playPause(); //<>//
+    drawGrid();
+    liveInput();
+    back_update();
+  }
 } //<>//
