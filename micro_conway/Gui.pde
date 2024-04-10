@@ -37,7 +37,7 @@ class TextBox {
     }
     if (mousePressed) {
       Focused = hovered;
-      text = hovered&&!button ? "": text;
+      text = hovered&&!button&&stage=="main" ? "": text;
     }
     // Other
     if (Focused&&!button) {
@@ -47,7 +47,6 @@ class TextBox {
         }
       }
     } else if (Focused && button) {
-      m_debounce = true;
       stage = "play";
       dist = rules[0].value();
       underpop = rules[1].value();
@@ -59,7 +58,6 @@ class TextBox {
         old_rez = resolution;
       }
       Focused = false;
-      m_debounce = true;
     }
   }
 }

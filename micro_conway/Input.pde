@@ -1,5 +1,7 @@
 void liveInput() {
   if (mousePressed) {
+    
+    
     int clicked_index = floor(mouseX / resolution) + floor(mouseY / resolution) * int(b_width);
 
 
@@ -22,6 +24,11 @@ void keyPressed()
 {
   if (!keybounce) {
     if (key == ' ') {
+      if (!paused){
+        primary.halt();
+        primary = null;
+        primary = new Synth();
+      }
       keybounce=true;
       paused = !paused;
     } else if (keyCode == 82) {

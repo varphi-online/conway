@@ -24,6 +24,7 @@ void drawGrid() {
 
         if (buffers[current_buffer][i]) {
           pixels[update] = #ffffff;
+          alive_count ++;
         } else {
           pixels[update] = #000000;
         }
@@ -68,8 +69,10 @@ void playPause() {
   if (!paused&&frameCount%step_time==0) {
     if (current_buffer==0) {
       current_buffer = 1;
+      alive_count = 0;
     } else {
       current_buffer = 0;
+      alive_count = 0;
     }
   }
 }
