@@ -1,10 +1,10 @@
+boolean m_debounce = false;
+boolean keybounce = false;
+boolean mode;
+
 void liveInput() {
   if (mousePressed) {
-    
-    
     int clicked_index = floor(mouseX / resolution) + floor(mouseY / resolution) * int(b_width);
-
-
     clicked_index = min(buffers[current_buffer].length-1, (max(0, clicked_index)));
     if (!m_debounce) {
       mode = buffers[current_buffer][clicked_index];
@@ -24,7 +24,7 @@ void keyPressed()
 {
   if (!keybounce) {
     if (key == ' ') {
-      if (!paused){
+      if (!paused) {
         primary.halt();
         primary = null;
         primary = new Synth();
@@ -46,4 +46,5 @@ void keyReleased() {
 }
 void mouseReleased() {
   m_debounce = false;
+  volume.stopped_interaction();
 }

@@ -1,3 +1,9 @@
+boolean[][] buffers;
+int current_buffer;
+boolean paused = true;
+int step_time = 2; //frames between update
+int underpop, overpop, birth, dist;
+
 void life_setup() {
   buff_size = width*height/floor(pow(resolution, 2));
   buffers = new boolean[2][buff_size];
@@ -82,8 +88,10 @@ void reset() {
     buffers[0][i] = false;
     buffers[1][i] = false;
   }
-  for (int i = 0; i < b_width; i ++) {
-    buffers[0][i+((height/resolution)/2)*int(b_width)] = true;
-    buffers[1][i+((height/resolution)/2)*int(b_width)] = true;
+  if (options[0].value()) {
+    for (int i = 0; i < b_width; i ++) {
+      buffers[0][i+((height/resolution)/2)*int(b_width)] = true;
+      buffers[1][i+((height/resolution)/2)*int(b_width)] = true;
+    }
   }
 }
