@@ -37,6 +37,10 @@ void keyPressed()
     } else if (key == 'm') {
       paused = true;
       stage = stage == "main" ? "play": "main";
+    } else if (key == 's'&&stage=="play"){
+      keybounce=true;
+      String extension = options[3].value() ? "tif": "png";
+      saveFrame(str(dist)+"-"+str(underpop)+"-"+str(overpop)+"-"+str(birth)+"-##."+extension);
     }
   }
 }

@@ -45,14 +45,13 @@ class Synth {
 }
 
 float note(int num) {
-  float freq = (442 * pow(2, (num-49)/12.0))%3000;
+  float freq = (442 * pow(2, ((num%400)-49)/12.0))%3000;
   return freq;
 }
 
-void play_vars() {
+void play_vars() { 
   if (mousePressed&&stage=="play") {
     primary.mouse[0].play();
-    println(note(int((mouseX/float(width))*30)));
     primary.mouse[0].freq(note(20+int((mouseX/float(width))*40)));
     primary.mouse[1].play();
     primary.mouse[1].freq(note(20+int((mouseY/float(height))*40)));
@@ -73,7 +72,7 @@ void play_vars() {
     primary.triangle[2].freq(note(dist+underpop+overpop +start+alive_ratio));
     primary.triangle[3].freq(note(dist+underpop+overpop+birth + start+alive_ratio));
     primary.triangle[4].freq(note(int((alive_count/float(buff_size))*start+alive_ratio)));
-    primary.triangle[5].freq(note(int(start*alive_ratio)));
+    primary.triangle[5].freq(note(int(alive_ratio)));
   } else {
     for (int i = 0; i < primary.tricount; i++) {
       primary.triangle[i].stop();
@@ -82,7 +81,7 @@ void play_vars() {
 }
 
 void music_handle() {
-  float vol = volume.value();
+  float vol = 1.3*volume.value();
   if (music.position()>=music.duration()-0.1) {
     music.cue(0);
   }

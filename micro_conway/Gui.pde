@@ -170,19 +170,20 @@ boolean isNumeric(String str) {
 // This mess is because i'm currently on a 16:10 4k monitor and hope the relative positions will keep it looking good.
 void gui_init() {
   int xoffset = width-width/2+width/3;
-  int yoffset = height/4;
+  int yoffset = height/5+height/50;
   int size = 75;
   rules[0] = new TextBox(xoffset, yoffset, size, size, "1", false);
   rules[1] = new TextBox(xoffset, yoffset+height/8, size, size, "2", false);
   rules[2] = new TextBox(xoffset, yoffset+height/4, size, size, "3", false);
   rules[3] = new TextBox(xoffset, yoffset+height/4+height/8, size, size, "3", false);
   rules[4] = new TextBox(xoffset, yoffset+height/4+height/8+height/8, size, size, "2", false);
-  rules[5] = new TextBox(width/2-150, yoffset+height/2+height/8, 300, int(size*1.2), "Start", true);
+  rules[5] = new TextBox(int(width/2-(text_scale*290/2)), yoffset+height/2+height/7, int(text_scale*290), int(text_scale*size*1.15), "Start", true);
 
   int ypos = int(rules[5].y_pos()-height/256);
   options[0] = new CheckBox(width/2+width/8, ypos, 30, true, "Start with line");
-  options[1] = new CheckBox(width/2+width/8+width/10, ypos, 30, false, "Mute");
-  options[2] = new CheckBox(width/2+width/8+width/5, ypos, 30, false, "Music");
+  options[1] = new CheckBox(width/2+width/8+width/16, ypos, 30, false, "Mute");
+  options[2] = new CheckBox(width/2+width/8+width/8, ypos, 30, false, "Music");
+  options[3] = new CheckBox(width/2+width/8+width/8+width/16, ypos, 30, false, "HQ Images");
 
   volume = new Slider(width/2-width/8-width/5, ypos, int(500*text_scale), 0.3, "volume");
 }
@@ -222,7 +223,7 @@ void gui() {
   textSize(text_scale*22);
   String description ="A cellular automaton consists of a regular grid of cells, each in one of a finite number of states, such as on and off.  For each cell, a set of cells called its neighborhood is defined relative to the specified cell. An initial state is selected by assigning a state for each cell. A new generation is created, according to some fixed rule that determines the new state of each cell in terms of the current state of the cell and the states of the cells in its neighborhood.\n\nThis program allows you to change these rules during runtime, giving the ability to drastically change the automaton's output. There is also an auditory aspect, where pitch is determined by the ratio of alive to dead cells, as well as how many cells are alive for any given generation. You can use the mouse cursor to inteact live with the simulation, changing how it may have played out without your input. Enjoy!";
   String examples = "\n\n--------------------------------\n\nSome examples:\n\nWood Grain: 4-2-9-2 | Will work with almost any initial state.\n\nPitri Dish: 1-4-9-3 | Must start from a noisy initial state to degenerate into small starting patches of cells.";
-  String controls = "\n\n--------------------------------\n\nControls:\n\nSPACE   -  Play/pause\nM       -  Return to this menu\nR       -  Restart simulation\nESC     -  Exit\nMOUSE   -  Draw/Erase\n";
+  String controls = "\n\n--------------------------------\n\nControls:\n\nSPACE   -  Play/pause\nM       -  Return to this menu\nR       -  Restart simulation\nS       -  Save image\nESC     -  Exit\nMOUSE   -  Draw/Erase\n";
   text(description+examples+controls, width/8, rules[0].y_pos()-25, width/2-width/8-width/16, rules[3].y_pos());
 }
 

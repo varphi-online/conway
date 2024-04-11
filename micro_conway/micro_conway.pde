@@ -4,7 +4,7 @@ int resolution, buff_size, old_rez, brush_size, alive_count, alive_ratio;
 String stage;
 PFont mono;
 TextBox[] rules = new TextBox[6];
-CheckBox[] options = new CheckBox[3];
+CheckBox[] options = new CheckBox[4];
 Slider volume;
 Synth primary;
 SoundFile music;
@@ -17,7 +17,7 @@ void setup() {
   fullScreen();
   //size(1920,1080);
   text_scale = width/2560.0;
-  windowTitle("Space to play/pause, click to edit.");
+  windowTitle("Playing God");
   frameRate = 60;
   stage = "main";
   brush_size=1;
