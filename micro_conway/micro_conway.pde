@@ -11,6 +11,8 @@ SoundFile music;
 
 void setup() {
   // Window setup
+  PImage icon = loadImage("icon.tiff");
+  surface.setIcon(icon);
   background(0);
   mono = createFont("OCR A Extended", 128);
   textFont(mono);
