@@ -3,7 +3,7 @@ boolean keybounce = false;
 boolean mode;
 
 void liveInput() {
-  if (mousePressed) {
+  if (mousePressed&&!rules[0].starting) {
     int clicked_index = floor(mouseX / resolution) + floor(mouseY / resolution) * int(b_width);
     clicked_index = min(buffers[current_buffer].length-1, (max(0, clicked_index)));
     if (!m_debounce) {
@@ -34,13 +34,13 @@ void keyPressed()
     } else if (keyCode == 82) {
       reset();
       keybounce=true;
-    } else if (key == 'm') {
+    } else if (key == 'm'||key == 'e') {
       paused = true;
       stage = stage == "main" ? "play": "main";
     } else if (key == 's'&&stage=="play"){
       keybounce=true;
       String extension = options[3].value() ? "tif": "png";
-      saveFrame(str(dist)+"-"+str(underpop)+"-"+str(overpop)+"-"+str(birth)+"-##."+extension);
+      saveFrame("Screenshots/"+str(dist)+"-"+str(underpop)+"-"+str(overpop)+"-"+str(birth)+"-##."+extension);
     }
   }
 }
@@ -51,4 +51,6 @@ void keyReleased() {
 void mouseReleased() {
   m_debounce = false;
   volume.stopped_interaction();
+  
+  rules[0].starting=false;
 }
