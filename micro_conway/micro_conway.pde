@@ -1,6 +1,7 @@
-import processing.sound.*; //<>// //<>//
+// Requires the processing built in sound library. //<>//
+import processing.sound.*; //<>//
 float b_width, text_scale;
-int resolution, buff_size, old_rez, brush_size, alive_count, alive_ratio;
+int resolution, buff_size, old_rez, alive_count, alive_ratio;
 String stage;
 PFont mono;
 TextBox[] rules = new TextBox[7];
@@ -13,25 +14,28 @@ void setup() {
   // Window setup
   PImage icon = loadImage("icon.tiff");
   surface.setIcon(icon);
-  background(0);
   mono = createFont("OCR A Extended", 128);
   textFont(mono);
   fullScreen();
-  //size(1920,1080);
+  background(0);
   text_scale = width/2560.0;
   windowTitle("Playing God");
   frameRate = 60;
+  
+  // Gui init
   stage = "main";
-  brush_size=1;
   gui_init();
-  primary = new Synth();
-  alive_ratio=0;
+  
+  // Sound init
   music = new SoundFile(this, "temp_music.mp3");
   music.amp(0.06);
+  primary = new Synth();
+  alive_ratio=0;
 }
 
 
 void draw() {
+  // Rudimentary check to make sue music and generates sound cannot play simultaneously.
   music_handle();
   if (!options[1].value()&&!options[2].value()) {
     play_vars();
